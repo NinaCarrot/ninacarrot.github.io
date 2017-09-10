@@ -1,0 +1,192 @@
+<html>
+<body>
+<div align=center>
+<canvas id="view" width="512" height="256"></canvas>
+</div>
+<div align=center>
+<button onClick="facing(-1);">Turn Left</button>
+<button onClick="move();">Forward</button>
+<button onClick="facing(1);">Turn Right</button>
+</div>
+
+<style type="text/css">
+  canvas { border: 1px solid black; }
+</style>
+
+<script>
+
+var face = 0;
+
+var py = 2;
+var px = 2;
+
+function facing(wha) {
+    face += wha + 4;
+    face = face % 4;
+    console.log("facing", face);
+    draw(get_slice(map, px, py, face));
+}
+
+function move() {
+    if (face == 0) {
+        if (map[py-1][px] == 0) py -= 1;
+    }
+    if (face == 1) {
+        if (map[py][px+1] == 0) px += 1;
+    }
+    if (face == 2) {
+        if (map[py+1][px] == 0) py += 1;
+    }
+    if (face == 3) {
+        if (map[py][px-1] == 0) px -= 1;
+    }
+
+    console.log("px py", px, py);
+
+    draw(get_slice(map, px, py, face));
+}
+
+var map = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 0, 1, 1, 0, 1, 1, 1],
+    [1, 1, 0, 1, 1, 0, 1, 1, 1],
+    [1, 1, 0, 1, 0, 0, 0, 1, 1],
+    [1, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+]
+
+
+//resources
+var w1 = new Image();
+w1.src = 'wall_l1.png';
+var w2 = new Image();
+w2.src = 'wall_l2.png';
+var w3 = new Image();
+w3.src = 'wall_l3.png';
+
+//reversed
+var w1r = new Image();
+w1r.src = 'wall_r1.png';
+var w2r = new Image();
+w2r.src = 'wall_r2.png';
+var w3r = new Image();
+w3r.src = 'wall_r3.png';
+
+var c1 = new Image();
+c1.src = 'wall_1.png';
+var c2 = new Image();
+c2.src = 'wall_2.png';
+var c3 = new Image();
+c3.src = 'wall_3.png';
+
+//init
+
+var canvas = document.getElementById('view');
+var ctx = canvas.getContext('2d');
+
+ctx.scale(2,2);
+
+var grd=ctx.createLinearGradient(0,0,256,0);
+grd.addColorStop(0,"rgba(0, 0, 0, 0.5)");
+grd.addColorStop(0.5,"rgba(0, 0, 0, 1)");
+grd.addColorStop(1,"rgba(0, 0, 0, 0.5)");
+
+
+function draw(arr) {
+    
+    console.log(arr);
+
+    //roof
+    ctx.fillStyle = 'rgb(0, 150, 150)';
+    ctx.fillRect(0, 0, 256, 64);
+
+    // floor
+    ctx.fillStyle = 'rgb(120, 120, 120)';
+    ctx.fillRect(0, 64, 256, 64);
+
+    ctx.fillStyle=grd;
+    ctx.fillRect(0,0,256,128)
+
+
+    //level1 walls
+    if (arr[0][0] == 1) {
+        ctx.drawImage(w3, 96, 48);
+        ctx.drawImage(c2, 32, 48);
+    }
+    if (arr[0][2] == 1) {
+        ctx.drawImage(w3r, 144, 48);
+        ctx.drawImage(c2, 160, 48);
+    }
+    if (arr[0][1] == 1) {
+        ctx.drawImage(c2, 96, 48);
+    }
+
+    //level2 walls
+    if (arr[1][0] == 1) {
+        ctx.drawImage(w2, 64, 32);
+        ctx.drawImage(c1, -64, 32);
+    }
+    if (arr[1][2] == 1) {
+        ctx.drawImage(w2r, 160, 32);
+        ctx.drawImage(c1, 192, 32);
+    }
+    if (arr[1][1] == 1) {
+        ctx.drawImage(c1, 64, 32);
+    }
+
+    //level1 walls
+    if (arr[2][0] == 1) {
+        ctx.drawImage(w1, 0, 0);
+    }
+    if (arr[2][2] == 1) {
+        ctx.drawImage(w1r, 192, 0);
+    }
+
+}
+
+var x_arr = [
+    [1, 1, 1],
+    [1, 0, 0],
+    [1, 0, 1]
+]
+
+function get_slice(map, px, py, facing) {
+    if (facing == 0) {
+        return [
+                [map[py-2][px-1], map[py-2][px], map[py-2][px+1]],
+                [map[py-1][px-1], map[py-1][px], map[py-1][px+1]],
+                [map[py][px-1], map[py][px], map[py][px+1]],
+            ]
+    }
+    if (facing == 1) {
+        return [
+                [map[py-1][px+2], map[py][px+2], map[py+1][px+2]],
+                [map[py-1][px+1], map[py][px+1], map[py+1][px+1]],
+                [map[py-1][px], map[py][px], map[py+1][px]],
+            ]
+    }
+    if (facing == 2) {
+        return [
+                [map[py+2][px+1], map[py+2][px], map[py+2][px-1]],
+                [map[py+1][px+1], map[py+1][px], map[py+1][px-1]],
+                [map[py][px+1], map[py][px], map[py][px-1]],
+            ]
+    }
+    if (facing == 3) {
+        return [
+                [map[py+1][px-2], map[py][px-2], map[py-1][px-2]],
+                [map[py+1][px-1], map[py][px-1], map[py-1][px-1]],
+                [map[py+1][px], map[py][px], map[py-1][px]],
+            ]
+    }
+}
+
+draw(get_slice(map, px, py, face));
+</script>
+
+</body>
+</html>
