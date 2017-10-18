@@ -27,6 +27,7 @@
             var p_upic = -1;
             var p_msg = -1;
             var counter = 0;
+            var likes = 0;
 
             function remove_me(event) {
                 console.log("remove_me");
@@ -97,13 +98,24 @@
                 return msg0 + img + msg1 + name + msg2 + rude() + msg3;
             }
 
+            function out_of_likes() {
+                document.getElementById("upic").style.background = "url('img/out.png') center / cover";
+                document.getElementById("nameage").innerHTML = "Sorry, you're out of likes for today. Maybe try premium?";
+                document.getElementById("likebuttons").remove();
+            }
+
             function like() {
                 from = document.getElementById("nameage").innerHTML;
                 avatar = "img/av_" + p_upic + ".png";
                 document.getElementById("messages").innerHTML = message(from, avatar) + document.getElementById("messages").innerHTML;
                 counter += 1;
                 document.getElementById("counter").innerHTML = "Chat (" + counter + ")";
-                new_guy();
+                likes += 1;
+                if (likes < 30) {
+                    new_guy();
+                } else {
+                    out_of_likes();
+                };
             }
         </script>
 
@@ -141,7 +153,7 @@
                   <div class="mdl-card__supporting-text">
                     <b id="nameage">Chris, 25</b>
                   </div>
-                  <div class="mdl-card__actions mdl-card--border">
+                  <div class="mdl-card__actions mdl-card--border" id="likebuttons">
                         <center>
                             <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="new_guy()">
                               <i class="material-icons">thumb_down</i>
@@ -172,7 +184,7 @@
 
 <style>
 body:after {
-  content: url(img/av_1.png) url(img/av_2.png) url(img/av_3.png) url(img/av_4.png) url(img/av_5.png) url(img/av_6.png) url(img/av_7.png) url(img/av_8.png) url(img/av_9.png) url(img/av_10.png) url(img/av_11.png) url(img/av_12.png) url(img/av_13.png) url(img/av_14.png) url(img/av_15.png) url(img/av_16.png) url(img/av_17.png) url(img/av_18.png) url(img/av_19.png) url(img/av_0.png);
+  content: url(img/av_1.png) url(img/av_2.png) url(img/av_3.png) url(img/av_4.png) url(img/av_5.png) url(img/av_6.png) url(img/av_7.png) url(img/av_8.png) url(img/av_9.png) url(img/av_10.png) url(img/av_11.png) url(img/av_12.png) url(img/av_13.png) url(img/av_14.png) url(img/av_15.png) url(img/av_16.png) url(img/av_17.png) url(img/av_18.png) url(img/av_19.png) url(img/av_0.png) url(img/out.png);
   display: none; 
 }
 </style>
