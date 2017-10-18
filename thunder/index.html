@@ -24,6 +24,9 @@
         </div>
 
         <script>
+            var p_upic = '';
+            var p_msg = '';
+
             function remove_me(event) {
                 console.log("remove_me");
                 event.target.parentNode.parentNode.parentNode.remove();
@@ -57,14 +60,26 @@
                     'do you want to exchange photos?',
                     'i\'m sooo bored',
                     'you look like a whore',
-                    'would you give me a blowjob please?'
+                    'would you give me a blowjob please?',
+                    'send nudes plz',
+                    'i want to see your boobs'
                 ]
-                return rudes[Math.floor((Math.random() * rudes.length))];
+                msg = Math.floor((Math.random() * rudes.length));
+                while (msg == p_msg) {
+                    msg = Math.floor((Math.random() * rudes.length));
+                }
+                p_msg = msg;
+                return rudes[msg];
             }
 
             function new_guy() {
                 document.getElementById("nameage").innerHTML = name() + ", " + Math.floor((Math.random() * 30) + 18);
-                document.getElementById("upic").style.background = "url('img/av_" + Math.floor((Math.random() * 19) + 1) +".png') center / cover";
+                upic = Math.floor(Math.random() * 20);
+                while (upic == p_upic) {
+                    upic = Math.floor(Math.random() * 20);
+                }
+                p_upic = upic;
+                document.getElementById("upic").style.background = "url('img/av_" + upic +".png') center / cover";
             }
 
             function message(name, img) {
@@ -77,8 +92,7 @@
 
             function like() {
                 from = document.getElementById("nameage").innerHTML;
-                avatar = document.getElementById("upic").style.background.slice(22, 35);
-                if (avatar[avatar.length-1] == '"') avatar = avatar.slice(0, avatar.length-1);
+                avatar = "img/av_" + p_upic + ".png";
                 document.getElementById("messages").innerHTML = message(from, avatar) + document.getElementById("messages").innerHTML;
                 new_guy();
             }
@@ -149,7 +163,7 @@
 
 <style>
 body:after {
-  content: url(img/av_1.png) url(img/av_2.png) url(img/av_3.png) url(img/av_4.png) url(img/av_5.png) url(img/av_6.png) url(img/av_7.png) url(img/av_8.png) url(img/av_9.png) url(img/av_10.png) url(img/av_11.png) url(img/av_12.png) url(img/av_13.png) url(img/av_14.png) url(img/av_15.png) url(img/av_16.png) url(img/av_17.png) url(img/av_18.png) url(img/av_19.png) url(img/av_20.png);
+  content: url(img/av_1.png) url(img/av_2.png) url(img/av_3.png) url(img/av_4.png) url(img/av_5.png) url(img/av_6.png) url(img/av_7.png) url(img/av_8.png) url(img/av_9.png) url(img/av_10.png) url(img/av_11.png) url(img/av_12.png) url(img/av_13.png) url(img/av_14.png) url(img/av_15.png) url(img/av_16.png) url(img/av_17.png) url(img/av_18.png) url(img/av_19.png) url(img/av_0.png);
   display: none; 
 }
 </style>
