@@ -24,12 +24,19 @@
         </div>
 
         <script>
-            var p_upic = '';
-            var p_msg = '';
+            var p_upic = -1;
+            var p_msg = -1;
+            var counter = 0;
 
             function remove_me(event) {
                 console.log("remove_me");
                 event.target.parentNode.parentNode.parentNode.remove();
+                counter -= 1;
+                if (counter <= 0) {
+                    document.getElementById("counter").innerHTML = "Chat";
+                } else {
+                    document.getElementById("counter").innerHTML = "Chat (" + counter + ")";
+                };
             }
 
             function name() {
@@ -94,6 +101,8 @@
                 from = document.getElementById("nameage").innerHTML;
                 avatar = "img/av_" + p_upic + ".png";
                 document.getElementById("messages").innerHTML = message(from, avatar) + document.getElementById("messages").innerHTML;
+                counter += 1;
+                document.getElementById("counter").innerHTML = "Chat (" + counter + ")";
                 new_guy();
             }
         </script>
@@ -109,7 +118,7 @@
             <!-- Tabs -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
               <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Discover</a>
-              <a href="#fixed-tab-2" class="mdl-layout__tab">Chat</a>
+              <a href="#fixed-tab-2" class="mdl-layout__tab" id="counter">Chat</a>
             </div>
           </header>
           <div class="mdl-layout__drawer">
