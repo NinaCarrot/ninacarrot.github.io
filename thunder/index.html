@@ -79,7 +79,7 @@
                 from = document.getElementById("nameage").innerHTML;
                 avatar = document.getElementById("upic").style.background.slice(22, 35);
                 if (avatar[avatar.length-1] == '"') avatar = avatar.slice(0, avatar.length-1);
-                document.getElementById("messages").innerHTML += message(from, avatar);
+                document.getElementById("messages").innerHTML = message(from, avatar) + document.getElementById("messages").innerHTML;
                 new_guy();
             }
         </script>
