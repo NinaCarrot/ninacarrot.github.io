@@ -1,0 +1,35 @@
+#main {
+    margin: auto;
+    width: 400px;
+    height: 640px;
+    margin-top: 40px;
+    background: rgba(252, 220, 247);
+}
+
+#content {
+    visibility: hidden;
+}
+
+.mdl-layout__container {
+    width: 400px !important; 
+    height: 640px !important;
+}
+
+.chat-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.av.mdl-card {
+  width: 400px;
+}
+.av > .mdl-card__title {
+  color: #fff;
+  height: 400px;
+  background: url('img/av_15.png') center / cover;
+}
+
+.demo-list-three {
+  width: 400px;
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<link rel="stylesheet" href="main.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+    <div id="main">
+
+        <div id="logo">
+            <img src='img/logo.png'>
+            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+               setTimeout(function(){
+                    document.getElementById("logo").remove()
+                    document.getElementById("content").style.visibility = "visible";
+                    new_guy();
+                }, 3000);
+            }, false);
+            </script>
+        </div>
+
+        <script>
+            function remove_me(event) {
+                console.log("remove_me");
+                event.target.parentNode.parentNode.parentNode.remove();
+            }
+
+            function name() {
+                names = ['Francesco', 'Manual', 'Jae', 'Gaylord', 'Gaston', 'Filiberto', 'Deangelo', 'Michale', 'Granville', 'Wes', 'Malik', 'Zackary', 'Tuan', 'Nicky', 'Eldridge', 'Cristopher', 'Cortez', 'Antione', 'Malcom', 'Long', 'Korey', 'Jospeh', 'Colton', 'Waylon', 'Von', 'Hosea', 'Shad', 'Santo', 'Rudolf', 'Rolf', 'Rey', 'Renaldo', 'Marcellus', 'Lucius', 'Lesley', 'Kristofer', 'Boyce', 'Benton', 'Man', 'Kasey', 'Jewell', 'Hayden', 'Harland', 'Arnoldo', 'Rueben', 'Leandro', 'Kraig', 'Jerrell', 'Jeromy', 'Hobert', 'Cedrick', 'Arlie', 'Winford', 'Wally', 'Patricia', 'Luigi', 'Keneth', 'Jacinto', 'Graig', 'Franklyn', 'Edmundo', 'Sid', 'Porter', 'Leif', 'Lauren', 'Jeramy', 'Elisha', 'Buck', 'Willian', 'Vincenzo', 'Shon', 'Michal', 'Lynwood', 'Lindsay', 'Jewel', 'Jere', 'Hai', 'Elden', 'Dorsey', 'Darell', 'Broderick', 'Alonso']
+                return names[Math.floor((Math.random() * names.length))];
+            }
+
+            function rude() {
+                rudes = ['Hey babe your so hot let\'s fuck',
+                    'wanna see my dick?',
+                    'Hello. Are you up for a sex?',
+                    'Do you do sex for money?',
+                    'You\'re so stunning. I want to fuck you',
+                    'Let\'s fuck',
+                    'I don\'t want to date, I just want to fuck you',
+                    'I\'m looking for a sex slave',
+                    'Hi, that\'s my dick [photo]',
+                    'I want to fuck you hon',
+                    'I alredy cum bcoz of you',
+                    'Will you call me "Daddy"?',
+                    'Hey beauty, do you have a cute girlfriend?',
+                    'your so sexxxy',
+                    'I want you to bear my children',
+                    'i\'m horny will you help me?',
+                    'are you horny hon?',
+                    'hiii babe are you up to fun',
+                    'let\'s hang out together at my bedroom',
+                    'do you want to exchange photos?',
+                    'i\'m sooo bored',
+                    'you look like a whore',
+                    'would you give me a blowjob please?'
+                ]
+                return rudes[Math.floor((Math.random() * rudes.length))];
+            }
+
+            function new_guy() {
+                document.getElementById("nameage").innerHTML = name() + ", " + Math.floor((Math.random() * 30) + 18);
+                document.getElementById("upic").style.background = "url('img/av_" + Math.floor((Math.random() * 19) + 1) +".png') center / cover";
+            }
+
+            function message(name, img) {
+                msg0 = '<li class="mdl-list__item mdl-list__item--three-line"><span class="mdl-list__item-primary-content"><img class="chat-avatar" src="'
+                msg1 = '"><span>'
+                msg2 = '</span><span class="mdl-list__item-text-body">'
+                msg3 = '</span></span><span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action" href="#" onclick="remove_me(event)"><i class="material-icons">delete_forever</i></a></span></li>'
+                return msg0 + img + msg1 + name + msg2 + rude() + msg3;
+            }
+
+            function like() {
+                from = document.getElementById("nameage").innerHTML;
+                avatar = document.getElementById("upic").style.background.slice(22, 35);
+                if (avatar[avatar.length-1] == '"') avatar = avatar.slice(0, avatar.length-1);
+                document.getElementById("messages").innerHTML += message(from, avatar);
+                new_guy();
+            }
+        </script>
+
+
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                    mdl-layout--fixed-tabs" id="content">
+          <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+              <!-- Title -->
+              <span class="mdl-layout-title">thunder</span>
+            </div>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+              <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Discover</a>
+              <a href="#fixed-tab-2" class="mdl-layout__tab">Chat</a>
+            </div>
+          </header>
+          <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">thunder</span>
+            
+            <footer class="mdl-mini-footer">
+              <div class="mdl-mini-footer__left-section">
+                <div>Ridiculously realistic dating app simulator</div>
+                <div class="mdl-logo">By ninacarrot, 2017</div>
+              </div>
+            </footer>
+          </div>
+          <main class="mdl-layout__content">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+              <div class="page-content">
+
+                <div class="av mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title" id="upic">
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    <b id="nameage">Chris, 25</b>
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                        <center>
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onclick="new_guy()">
+                              <i class="material-icons">thumb_down</i>
+                            </button>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="like()">
+                              <i class="material-icons">thumb_up</i>
+                            </button>
+                        </center>
+                  </div>
+                </div>
+              
+              </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+              <div class="page-content">
+
+                <ul class="demo-list-three mdl-list" id="messages">
+                </ul>
+              
+              </div>
+            </section>
+          </main>
+        </div>
+
+    </div>
+
+
+<style>
+body:after {
+  content: url(img/av_1.png) url(img/av_2.png) url(img/av_3.png) url(img/av_4.png) url(img/av_5.png) url(img/av_6.png) url(img/av_7.png) url(img/av_8.png) url(img/av_9.png) url(img/av_10.png) url(img/av_11.png) url(img/av_12.png) url(img/av_13.png) url(img/av_14.png) url(img/av_15.png) url(img/av_16.png) url(img/av_17.png) url(img/av_18.png) url(img/av_19.png) url(img/av_20.png);
+  display: none; 
+}
+</style>
+
+</body>
+</html>
